@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="cetpro.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computacion - CETPRO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 600px;
+        }
+        /* Left Section - Welcome */
+        .left-section {
+            flex: 1;
+            background: linear-gradient(135deg, #0066cc 0%, #003366 100%);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .left-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        .logo-img img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+           border-radius: 50%;
+        }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .left-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .footer-links {
+            margin-top: auto;
+            display: flex;
+            gap: 20px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+        /* Middle Section - Form */
+        .middle-section {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .middle-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        .checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        .checkbox input {
+            margin-right: 12px;
+            margin-top: 4px;
+        }
+        .checkbox label {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .checkbox a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .checkbox a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 15px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc 0%, #003366 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #0066cc;
+            border: 2px solid #0066cc;
+        }
+        /* Signup Form (Hidden by default) */
+        #signup-section {
+            display: none;
+        }
+        /* Right Section - Mobile View */
+        .right-section {
+            display: none;
+            flex-direction: column;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #0066cc 0%, #003366 100%);
+            color: white;
+        }
+        .right-section .logo-container {
+            margin-bottom: 30px;
+        }
+        .right-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .right-section .logo-text {
+            font-size: 2.2rem;
+        }
+        .right-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .mobile-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .mobile-form .form-group input {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+        }
+        .mobile-form .btn {
+            background: white;
+            color: #0066cc;
+            border: 2px solid white;
+        }
+        .mobile-form .btn-secondary {
+            background: transparent;
+            color: white;
+        }
+        .right-section .footer-links {
+            margin-top: 30px;
+            justify-content: center;
+        }
+        /* Toggle Button */
+        #toggle-signup-btn {
+            background: transparent;
+            color: #0066cc;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 5px 0;
+            margin-top: 10px;
+            width: auto;
+            align-self: flex-start;
+        }
+        #toggle-signup-btn:hover {
+            color: #004080;
+            text-decoration: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .left-section {
+                display: none;
+            }
+            .middle-section {
+                flex: 1;
+                padding: 40px 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+            .middle-section {
+                display: none;
+            }
+            .right-section {
+                display: flex;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 15px;
+            }
+            .right-section {
+                padding: 30px 20px;
+            }
+            .mobile-form {
+                padding: 20px;
+            }
+        }
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .left-section > * {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .middle-section > * {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .right-section > * {
+            animation: fadeIn 0.6s ease-out;
+        }
+        /* Error message style */
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Modal Styles - Imagen más grande */
+        #loading-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95); /* Fondo más oscuro */
+            backdrop-filter: blur(5px); /* Efecto de desenfoque */
+        }
+        .modal-content {
+            background-color: transparent;
+            margin: 5% auto; /* Centrado vertical mejorado */
+            padding: 40px; /* Más padding */
+            border: none;
+            width: 95%; /* Más ancho */
+            max-width: 800px; /* Ancho máximo mayor */
+            text-align: center;
+            animation: zoomIn 0.5s ease-out;
+            position: relative; /* Para posicionar el botón de cerrar */
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.7); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        .modal-content img {
+            width: 100%;
+            max-width: 550px; /* Tamaño máximo de imagen aumentado significativamente */
+            height: auto;
+            border-radius: 25px; /* Bordes más redondeados */
+            margin-bottom: 35px; /* Más espacio debajo */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); /* Sombra más pronunciada */
+            border: 3px solid rgba(255,255,255,0.1); /* Borde sutil */
+            object-fit: cover;
+        }
+        .modal-content p {
+            color: white;
+            font-size: 1.8rem; /* Texto más grande */
+            margin-bottom: 20px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Sombra para mejor legibilidad */
+            font-weight: 300;
+        }
+        .modal-content .user-name {
+            font-weight: bold;
+            color: #66ccff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        /* Barra de carga animada */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #0066cc, #00ccff);
+            width: 0%;
+            border-radius: 4px;
+            animation: progressAnimation 5s linear forwards;
+        }
+        @keyframes progressAnimation {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Nuevo Modal para Programas e Información */
+        .info-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001; /* Mayor que el loading-modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9); /* Fondo oscuro */
+            backdrop-filter: blur(5px);
+        }
+        .info-modal-content {
+            background-color: transparent;
+            margin: 5% auto;
+            padding: 20px;
+            border: none;
+            width: 95%;
+            max-width: 900px; /* Aún más ancho para contenido */
+            text-align: center;
+            position: relative;
+            animation: zoomIn 0.5s ease-out;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+        .close-modal-btn:hover,
+        .close-modal-btn:focus {
+            color: #ccc;
+        }
+        .info-modal-content img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .info-modal-content h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .info-modal-content p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- The Modal con imagen más grande -->
+    <div id="loading-modal">
+        <div class="modal-content">
+            <img src="comunicado-01.jpg" alt="Bienvenida">
+            <p>Bienvenido, <span id="modal-user-name" class="user-name"></span></p>
+            <p>Redirigiendo...</p>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuevo Modal para Programas de Estudios -->
+    <div id="programas-modal" class="info-modal">
+        <div class="info-modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <img src="programa-estudios.jpg" alt="Programas de Estudios">
+            <h3>Programas de Estudios</h3>
+            
+        </div>
+    </div>
+
+    <!-- Nuevo Modal para Información sobre la Especialidad -->
+    <div id="especialidad-modal" class="info-modal">
+        <div class="info-modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <img src="comunicadoespe.jpg" alt="Información de Especialidad">
+            <h3>Información sobre la Especialidad</h3>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Left Section (Welcome) -->
+        <div class="left-section">
+            <h2>Bienvenido</h2>
+            <div class="logo-container">
+                <div class="logo-img">
+                    <img src="CETPRO.png" alt="Logo CETPRO">
+                </div>
+                <div class="logo-text">CETPRO - Dionisia Herrera Alvarado</div>
+            </div>
+            <p style="text-align: justify;">
+               El Centro de Educación Técnico-Productiva Dionisia Herrera Alvarado es una institución educativa pública ubicada en la región de Madre de Dios, dedicada a la formación técnico-productiva de jóvenes y adultos, brindando oportunidades de capacitación en carreras de corta duración que responden a las demandas del entorno laboral local, regional y nacional.
+            </p>
+            <div class="footer-links">
+                <a href="#" id="programas-link">Programas de Estudios</a>
+                <span>|</span>
+                <a href="#" id="especialidad-link">Informacion sobre la Especialidad</a>
+            </div>
+        </div>
+        <!-- Middle Section (Form) -->
+        <div class="middle-section">
+            <h2>Soporte tecnico y Operacion de Centros de Computo</h2>
+            <!-- Login Form -->
+            <div id="login-section">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-dni">DNI</label>
+                        <input type="text" id="login-dni" placeholder="Ingresa tu DNI" required>
+                        <div id="login-dni-error" class="error-message">DNI no encontrado</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" placeholder="Ingresa tu Contraseña" required>
+                        <div id="login-password-error" class="error-message">Contraseña incorrecta</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <a href="https://forms.gle/WLJGEvoEqgZoDwy88" class="btn" id="toggle-signup-btn">¿No tienes cuenta? Regístrate</a>
+                </form>
+            </div>
+            <!-- Signup Form -->
+            <div id="signup-section">
+                
+                <form id="signup-form">
+                    
+                    <div class="form-group">
+                        <label for="signup-dni">DNI</label>
+                        <input type="text" id="signup-dni" placeholder="Ingresa tu DNI" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Contraseña</label>
+                        <input type="password" id="signup-password" placeholder="Ingresa tu Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                   <a href="https://forms.gle/WLJGEvoEqgZoDwy88" id="toggle-login-btn" class="btn">¿No tienes cuenta? Regístrate</a>
+                </form>
+            </div>
+        </div>
+        <!-- Right Section (Mobile View) -->
+        <div class="right-section">
+            <h2>Bienvenido</h2>
+            <div class="logo-container">
+                 <div class="logo-img">
+                    <img src="CETPRO.png" alt="Logo CETPRO">
+                </div>
+                <div class="logo-text">CETPRO - Dionisia Herrera Alvarado</div>
+            </div>
+            <p style="text-align: justify;">
+                El Centro de Educación Técnico-Productiva Dionisia Herrera Alvarado es una institución educativa pública...
+            </p>
+             <div class="mobile-form">
+                 <div id="mobile-login-section">
+                    <form id="mobile-login-form">
+                         <div class="form-group">
+                             <label for="mobile-login-dni">DNI</label>
+                             <input type="text" id="mobile-login-dni" placeholder="Ingresa tu DNI" required>
+                             <div id="mobile-login-dni-error" class="error-message">DNI no encontrado</div>
+                         </div>
+                         <div class="form-group">
+                             <label for="mobile-login-password">Contraseña</label>
+                             <input type="password" id="mobile-login-password" placeholder="Ingresa tu Contraseña" required>
+                             <div id="mobile-login-password-error" class="error-message">Contraseña incorrecta</div>
+                         </div>
+                         <button type="submit" class="btn">Ingresar</button>
+                         <button type="button" id="mobile-toggle-signup-btn" class="btn btn-secondary">Regístrate</button>
+                     </form>
+                 </div>
+                 <div id="mobile-signup-section" style="display:none;">
+                     <form id="mobile-signup-form">
+                         <div class="form-group">
+                             <label for="mobile-signup-name">Nombre Completo</label>
+                             <input type="text" id="mobile-signup-name" placeholder="Ingresa tu Nombre Completo" required>
+                         </div>
+                         <div class="form-group">
+                            <label for="mobile-signup-dni">DNI</label>
+                            <input type="text" id="mobile-signup-dni" placeholder="Ingresa tu DNI" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile-signup-password">Contraseña</label>
+                            <input type="password" id="mobile-signup-password" placeholder="Ingresa tu Contraseña" required>
+                        </div>
+                         <button type="submit" class="btn">Registrarse</button>
+                         <button type="button" id="mobile-toggle-login-btn" class="btn btn-secondary">Inicia Sesión</button>
+                     </form>
+                 </div>
+             </div>
+            <div class="footer-links">
+                <a href="comunicado.jpg" id="mobile-programas-link">Programas de Estudios</a>
+                <span>|</span>
+                <a href="comunicado.jpg" id="mobile-especialidad-link">Informacion sobre la Especialidad</a>
+            </div>
+        </div>
+    </div>
+<script src="password.js"></script>
+    <script>
+        // Usuarios autorizados
+        // Función para validar credenciales
+        function validateCredentials(dni, password) {
+            const user = users.find(u => u.dni === dni);
+            if (!user) return { valid: false, reason: 'dni' };
+            if (user.password !== password) return { valid: false, reason: 'password' };
+            return { valid: true, user };
+        }
+        // Función para mostrar errores
+        function showLoginError(formType, errorType) {
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            if (formType === 'desktop') {
+                if (errorType === 'dni') {
+                    document.getElementById('login-dni-error').style.display = 'block';
+                } else if (errorType === 'password') {
+                    document.getElementById('login-password-error').style.display = 'block';
+                }
+            } else if (formType === 'mobile') {
+                if (errorType === 'dni') {
+                    document.getElementById('mobile-login-dni-error').style.display = 'block';
+                } else if (errorType === 'password') {
+                    document.getElementById('mobile-login-password-error').style.display = 'block';
+                }
+            }
+        }
+        // Función para ocultar todos los errores
+        function hideAllErrors() {
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        }
+        // Función para mostrar el modal con imagen grande
+        function showLoadingModal(userName) {
+            document.getElementById('modal-user-name').textContent = userName;
+            document.getElementById('loading-modal').style.display = 'block';
+        }
+        // Función para redirigir después de un retraso
+        function redirectAfterDelay(url, delayMs) {
+            setTimeout(() => {
+                window.location.href = url;
+            }, delayMs);
+        }
+
+        // --- Funciones para los nuevos modales ---
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modales al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            // Cerrar modal de programas
+            if (event.target == document.getElementById('programas-modal')) {
+                closeModal('programas-modal');
+            }
+            // Cerrar modal de especialidad
+            if (event.target == document.getElementById('especialidad-modal')) {
+                closeModal('especialidad-modal');
+            }
+            // Cerrar modal de loading
+            if (event.target == document.getElementById('loading-modal')) {
+                document.getElementById('loading-modal').style.display = 'none';
+            }
+        }
+
+        // --- Desktop Logic ---
+        const loginSection = document.getElementById('login-section');
+        const signupSection = document.getElementById('signup-section');
+        const toggleSignupBtn = document.getElementById('toggle-signup-btn');
+        const toggleLoginBtn = document.getElementById('toggle-login-btn');
+        
+        // Eventos para cambiar entre login y signup
+        toggleSignupBtn.addEventListener('click', () => {
+            loginSection.style.display = 'none';
+            signupSection.style.display = 'block';
+            hideAllErrors();
+        });
+        toggleLoginBtn.addEventListener('click', () => {
+            signupSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            hideAllErrors();
+        });
+
+        // Eventos para abrir modales de información desde el footer (desktop)
+        document.getElementById('programas-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('programas-modal');
+        });
+        document.getElementById('especialidad-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('especialidad-modal');
+        });
+
+        // Eventos para cerrar modales con el botón X
+        document.querySelectorAll('.close-modal-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.info-modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Handle Desktop Login Form Submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const dni = document.getElementById('login-dni').value.trim();
+            const password = document.getElementById('login-password').value;
+            hideAllErrors();
+            const validation = validateCredentials(dni, password);
+            if (validation.valid) {
+                showLoadingModal(validation.user.name);
+                redirectAfterDelay('https://sites.google.com/view/computacion-cetprodha/inicio', 5000);
+            } else {
+                showLoginError('desktop', validation.reason);
+            }
+        });
+        // Handle Desktop Signup Form Submission
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const dni = document.getElementById('signup-dni').value;
+            const password = document.getElementById('signup-password').value;
+            if (name && dni && password) {
+                alert(`¡Cuenta creada exitosamente!\nBienvenido ${name}`);
+                signupSection.style.display = 'none';
+                loginSection.style.display = 'block';
+                this.reset();
+            } else {
+                alert('Por favor, complete todos los campos.');
+            }
+        });
+        // --- Mobile Logic ---
+        const mobileLoginSection = document.getElementById('mobile-login-section');
+        const mobileSignupSection = document.getElementById('mobile-signup-section');
+        const mobileToggleSignupBtn = document.getElementById('mobile-toggle-signup-btn');
+        const mobileToggleLoginBtn = document.getElementById('mobile-toggle-login-btn');
+        mobileToggleSignupBtn.addEventListener('click', () => {
+            mobileLoginSection.style.display = 'none';
+            mobileSignupSection.style.display = 'block';
+            hideAllErrors();
+        });
+        mobileToggleLoginBtn.addEventListener('click', () => {
+            mobileSignupSection.style.display = 'none';
+            mobileLoginSection.style.display = 'block';
+            hideAllErrors();
+        });
+
+        // Eventos para abrir modales de información desde el footer (móvil)
+        document.getElementById('mobile-programas-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('programas-modal');
+        });
+        document.getElementById('mobile-especialidad-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('especialidad-modal');
+        });
+
+        // Handle Mobile Login Form Submission
+        document.getElementById('mobile-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const dni = document.getElementById('mobile-login-dni').value.trim();
+            const password = document.getElementById('mobile-login-password').value;
+            hideAllErrors();
+            const validation = validateCredentials(dni, password);
+            if (validation.valid) {
+                showLoadingModal(validation.user.name);
+                redirectAfterDelay('https://sites.google.com/view/computacion-cetprodha/inicio', 5000);
+            } else {
+                showLoginError('mobile', validation.reason);
+            }
+        });
+        // Handle Mobile Signup Form Submission
+        document.getElementById('mobile-signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('mobile-signup-name').value;
+            const dni = document.getElementById('mobile-signup-dni').value;
+            const password = document.getElementById('mobile-signup-password').value;
+            if (name && dni && password) {
+                alert(`¡Cuenta creada exitosamente!\nBienvenido ${name}`);
+                mobileSignupSection.style.display = 'none';
+                mobileLoginSection.style.display = 'block';
+                this.reset();
+            } else {
+                alert('Por favor, complete todos los campos.');
+            }
+        });
+        // --- General Enhancements ---
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                const errorDiv = this.parentElement.querySelector('.error-message');
+                if (errorDiv) errorDiv.style.display = 'none';
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
